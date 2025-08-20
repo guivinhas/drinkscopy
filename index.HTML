@@ -1,6 +1,27 @@
 <head><meta charset="utf-8"><meta name="download_date" content="2025-08-18T14:33:52.286Z">
     
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0">
+    <script>
+// Bloquear clique com o botão direito
+document.addEventListener('contextmenu', event => event.preventDefault());
+
+// Bloquear seleção de texto
+document.addEventListener('selectstart', event => event.preventDefault());
+document.addEventListener('mousedown', event => event.preventDefault());
+
+// Bloquear teclas de atalho comuns de dev tools e cópia
+document.addEventListener('keydown', function(e) {
+  if (
+    e.key === 'F12' ||
+    (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'J' || e.key === 'C')) ||
+    (e.ctrlKey && (e.key === 'U' || e.key === 'S' || e.key === 'C' || e.key === 'A'))
+  ) {
+    e.preventDefault();
+    return false;
+  }
+});
+</script>
+
     <style>
       *,
       *::before,
