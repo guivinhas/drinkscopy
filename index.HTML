@@ -22,6 +22,61 @@ document.addEventListener('keydown', function(e) {
 });
 </script>
 
+<!-- Meta Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '790786349970412');
+fbq('track', 'PageView');
+</script>
+<noscript>
+  <img height="1" width="1" style="display:none"
+       src="https://www.facebook.com/tr?id=790786349970412&ev=PageView&noscript=1"/>
+</noscript>
+<!-- End Meta Pixel Code -->
+
+<!-- Scroll Depth Tracking -->
+<script>
+(function() {
+  const thresholds = [25, 50, 75, 100];
+  const triggered = new Set();
+
+  function getScrollPercent() {
+    const scrollTop = window.scrollY || document.documentElement.scrollTop;
+    const windowHeight = window.innerHeight;
+    const docHeight = Math.max(
+      document.body.scrollHeight,
+      document.documentElement.scrollHeight,
+      document.body.offsetHeight,
+      document.documentElement.offsetHeight,
+      document.body.clientHeight,
+      document.documentElement.clientHeight
+    );
+    return Math.round(((scrollTop + windowHeight) / docHeight) * 100);
+  }
+
+  function checkThresholds() {
+    const percent = getScrollPercent();
+    thresholds.forEach(threshold => {
+      if (percent >= threshold && !triggered.has(threshold)) {
+        triggered.add(threshold);
+        fbq('trackCustom', 'ScrollDepth', { percent: threshold });
+        console.log(`[Pixel] ScrollDepth ${threshold}% disparado`);
+      }
+    });
+  }
+
+  window.addEventListener('scroll', checkThresholds);
+})();
+</script>
+
+
     <style>
       *,
       *::before,
